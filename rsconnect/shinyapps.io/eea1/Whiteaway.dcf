@@ -1,0 +1,13 @@
+name: Whiteaway
+title: Whiteaway
+username: eea1
+account: eea1
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11428639
+bundleId: 8344559
+url: https://eea1.shinyapps.io/Whiteaway/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: elgiganten_links.csv|whiteaway.py

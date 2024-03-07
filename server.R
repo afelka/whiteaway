@@ -57,8 +57,30 @@ function(input, output) {
   
   output$plot <- renderPlot({
     
+    highest_elgiganten <- data %>% filter(website == "Elgiganten") %>% filter(price == max(price)) %>% slice(1)
+    lowest_elgiganten <- data %>% filter(website == "Elgiganten") %>% filter(price == min(price)) %>% slice(1)
+    
+    highest_whiteaway <- data %>% filter(website == "Whiteaway") %>% filter(price == max(price)) %>% slice(1)
+    lowest_whiteaway <- data %>% filter(website == "Whiteaway") %>% filter(price == min(price)) %>% slice(1)
+    
     gg <- ggplot(data, aes(x = website, y = price, fill = website)) +  
       geom_violin(alpha = 0.7) +
+      geom_text_repel(data = highest_elgiganten, aes(x = website, y = price, 
+                                                  label = paste0(website, "'s highest price is ",
+                                                                 price)),
+                      color = "red", size = 2.5 , vjust = 1.5) + 
+      geom_text_repel(data = highest_whiteaway, aes(x = website, y = price, 
+                                                   label = paste0(website, "'s highest price is ",
+                                                                  price)),
+                    color = "blue", size = 2.5 , vjust = 1.5) +
+      geom_text_repel(data = lowest_elgiganten, aes(x = website, y = price, 
+                                                     label = paste0(website, "'s lowest price is ",
+                                                                    price)),
+                      color = "red", size = 2.5 , vjust = 2) + 
+      geom_text_repel(data = lowest_whiteaway, aes(x = website, y = price, 
+                                                    label = paste0(website, "'s lowest price is ",
+                                                                   price)),
+                      color = "blue", size = 2.5 , vjust = 2) +
       labs(title = "Price points of different Websites",
            x = "Website",
            y = "Price") +
