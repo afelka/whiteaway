@@ -22,7 +22,7 @@ data <- rbind(whiteaway, elgiganten, elsalg) %>% mutate(brand = if_else(brand ==
                                                                         "Liebherr", brand)) %>%
                                                  mutate(brand = if_else(brand == "GRAM",
                                                  "Gram", brand)) %>%
-                                                 mutate(brand = if_else(brand == ("SMEG" | "smeg" ),
+                                                 mutate(brand = if_else(brand == "SMEG" | brand == "smeg",
                                                  "Smeg", brand)) %>%
                                                  filter(brand != "")
 
@@ -134,7 +134,7 @@ function(input, output) {
     
     
     
-    paste0("<B> Number of articles withing different price brackets </B>")
+    paste0("<B> Number of articles within different price brackets </B>")
     
     
   }) 
