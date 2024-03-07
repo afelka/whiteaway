@@ -25,7 +25,9 @@ shinyUI(fluidPage(
                 
                 tabPanel("Price Points ", htmlOutput("price_points_text"), plotOutput('plot',width = "150%",height = "600px")),
                 
-                tabPanel("Brand Availability", htmlOutput("brand_text"), DT::dataTableOutput("table1"))
+                tabPanel("Brand Availability", htmlOutput("brand_text"), DT::dataTableOutput("table1")),
+                
+                tabPanel("Number of Articles within Price Brackets", htmlOutput("bracket_text"), DT::dataTableOutput("table2")),
                 
     )
     
