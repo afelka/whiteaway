@@ -50,8 +50,12 @@ function(input, output) {
       summarise(Number_of_products = n()) %>% rbind(data_total) %>%
       pivot_wider(names_from = website, values_from = Number_of_products,  values_fill = 0) %>%
       arrange(desc(Total)) %>% select(-Total)
-     
-    datatable(data_brand, options = list(dom = 'tpi'), filter = list(position = "bottom"))
+    
+    datatable(data_brand, options = list(dom = 'tpi'), filter = list(position = "bottom")) %>%
+      formatStyle(
+        columns = names(data_brand)[-1],  
+        backgroundColor = styleEqual(0, "pink")
+      )
     
     
   })
