@@ -24,7 +24,7 @@ data <- rbind(whiteaway, elgiganten, elsalg) %>% mutate(brand = if_else(brand ==
                                                  "Gram", brand)) %>%
                                                  mutate(brand = if_else(brand == "SMEG" | brand == "smeg",
                                                  "Smeg", brand)) %>%
-                                                 filter(brand != "")
+                                                 filter(brand != "" & !is.na(price)) 
 
 
 
