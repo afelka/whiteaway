@@ -9,15 +9,16 @@ library(tidyr)
 
 whiteaway <- read.csv("whiteaway_prices.csv")
 elgiganten <- read.csv("elgiganten_prices.csv")
+elsalg <- read.csv("elsalg_prices.csv")
 
 
 elgiganten$price <- as.numeric(gsub(".-", "", elgiganten$price))
 
 elgiganten <- elgiganten %>% filter(product_type != "Køletaske og køleboks" & price >= 200) 
 
-data <- rbind(whiteaway, elgiganten)
+elsalg$price <- as.numeric(gsub(",", ".", elsalg$price))
 
-
+data <- rbind(whiteaway, elgiganten, elsalg)
 
 
 
@@ -59,12 +60,15 @@ function(input, output) {
     
     highest_elgiganten <- data %>% filter(website == "Elgiganten") %>% filter(price == max(price)) %>% slice(1)
     lowest_elgiganten <- data %>% filter(website == "Elgiganten") %>% filter(price == min(price)) %>% slice(1)
+    median_elgiganten <- data %>% filter(website == "Elgiganten") %>% group_by(website) %>% summarise(price = median(price))
     
     highest_whiteaway <- data %>% filter(website == "Whiteaway") %>% filter(price == max(price)) %>% slice(1)
     lowest_whiteaway <- data %>% filter(website == "Whiteaway") %>% filter(price == min(price)) %>% slice(1)
-    
-    median_elgiganten <- data %>% filter(website == "Elgiganten") %>% group_by(website) %>% summarise(price = median(price))
     median_whiteaway <- data %>% filter(website == "Whiteaway") %>% group_by(website) %>% summarise(price = median(price))
+    
+    highest_elsalg <- data %>% filter(website == "Elsalg") %>% filter(price == max(price)) %>% slice(1)
+    lowest_elsalg <- data %>% filter(website == "Elsalg") %>% filter(price == min(price)) %>% slice(1)
+    median_elsalg <- data %>% filter(website == "Elsalg") %>% group_by(website) %>% summarise(price = median(price))
     
     gg <- ggplot(data, aes(x = website, y = price, fill = website)) +  
       geom_violin(alpha = 0.7) +
@@ -76,6 +80,10 @@ function(input, output) {
                                                    label = paste0(website, "'s highest price is ",
                                                                   price)),
                     color = "blue", size = 4 , vjust = -1.5) +
+      geom_text_repel(data = highest_elsalg, aes(x = website, y = price, 
+                                                    label = paste0(website, "'s highest price is ",
+                                                                   price)),
+                      color = "black", size = 4 , vjust = -1.5) +
       geom_text_repel(data = lowest_elgiganten, aes(x = website, y = price, 
                                                      label = paste0(website, "'s lowest price is ",
                                                                     price)),
@@ -84,6 +92,10 @@ function(input, output) {
                                                     label = paste0(website, "'s lowest price is ",
                                                                    price)),
                       color = "blue", size = 4 , vjust = 2) +
+      geom_text_repel(data = lowest_elsalg, aes(x = website, y = price, 
+                                                   label = paste0(website, "'s lowest price is ",
+                                                                  price)),
+                      color = "black", size = 4 , vjust = 2) +
       geom_text_repel(data = median_elgiganten, aes(x = website, y = price, 
                                                      label = paste0(website, "'s median price is ",
                                                                     price)),
@@ -92,6 +104,10 @@ function(input, output) {
                                                     label = paste0(website, "'s median price is ",
                                                                    price)),
                       color = "blue", size = 4 , vjust = -1.5) +
+      geom_text_repel(data = median_elsalg, aes(x = website, y = price, 
+                                                   label = paste0(website, "'s median price is ",
+                                                                  price)),
+                      color = "black", size = 4 , vjust = -1.5) +
       labs(title = "Price points of different Websites",
            x = "Website",
            y = "Price") +

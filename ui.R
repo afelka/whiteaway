@@ -10,12 +10,13 @@ library(ggrepel)
 #design shiny app: 
 shinyUI(fluidPage(
   
-  titlePanel("Whiteaway vs Elgiganten"),
+  titlePanel("Whiteaway vs Elgiganten vs Elsalg"),
   
   img(src="./whiteaway.png",  height="10%", width="10%",  align = "center"),
   img(src="./elgiganten.png",  height="10%", width="10%",  align = "center"),
+  img(src="./elsalg.png",  height="10%", width="10%",  align = "center"),
   
-  HTML("<p>Refrigerator Price comparison between Whiteaway and Elgiganten </p>"),
+  HTML("<p>Refrigerator Price comparison between Whiteaway, Elgiganten and Elsalg </p>"),
   
   
   
