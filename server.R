@@ -9,7 +9,7 @@ library(tidyr)
 
 whiteaway <- read.csv("whiteaway_prices.csv")
 elgiganten <- read.csv("elgiganten_prices.csv")
-elgiganten$website <- "Elgiganten"
+
 
 elgiganten$price <- as.numeric(gsub(".-", "", elgiganten$price))
 
