@@ -5,7 +5,7 @@ account: eea1
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11428639
-bundleId: 8344559
+bundleId: 8344591
 url: https://eea1.shinyapps.io/Whiteaway/
 version: 1
 asMultiple: FALSE

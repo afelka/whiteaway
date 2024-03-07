@@ -63,29 +63,42 @@ function(input, output) {
     highest_whiteaway <- data %>% filter(website == "Whiteaway") %>% filter(price == max(price)) %>% slice(1)
     lowest_whiteaway <- data %>% filter(website == "Whiteaway") %>% filter(price == min(price)) %>% slice(1)
     
+    median_elgiganten <- data %>% filter(website == "Elgiganten") %>% group_by(website) %>% summarise(price = median(price))
+    median_whiteaway <- data %>% filter(website == "Whiteaway") %>% group_by(website) %>% summarise(price = median(price))
+    
     gg <- ggplot(data, aes(x = website, y = price, fill = website)) +  
       geom_violin(alpha = 0.7) +
       geom_text_repel(data = highest_elgiganten, aes(x = website, y = price, 
                                                   label = paste0(website, "'s highest price is ",
                                                                  price)),
-                      color = "red", size = 2.5 , vjust = 1.5) + 
+                      color = "red", size = 4 , vjust = -1.5) + 
       geom_text_repel(data = highest_whiteaway, aes(x = website, y = price, 
                                                    label = paste0(website, "'s highest price is ",
                                                                   price)),
-                    color = "blue", size = 2.5 , vjust = 1.5) +
+                    color = "blue", size = 4 , vjust = -1.5) +
       geom_text_repel(data = lowest_elgiganten, aes(x = website, y = price, 
                                                      label = paste0(website, "'s lowest price is ",
                                                                     price)),
-                      color = "red", size = 2.5 , vjust = 2) + 
+                      color = "red", size = 4 , vjust = 2) + 
       geom_text_repel(data = lowest_whiteaway, aes(x = website, y = price, 
                                                     label = paste0(website, "'s lowest price is ",
                                                                    price)),
-                      color = "blue", size = 2.5 , vjust = 2) +
+                      color = "blue", size = 4 , vjust = 2) +
+      geom_text_repel(data = median_elgiganten, aes(x = website, y = price, 
+                                                     label = paste0(website, "'s median price is ",
+                                                                    price)),
+                      color = "red", size = 4 , vjust = -1.5) +
+      geom_text_repel(data = median_whiteaway, aes(x = website, y = price, 
+                                                    label = paste0(website, "'s median price is ",
+                                                                   price)),
+                      color = "blue", size = 4 , vjust = -1.5) +
       labs(title = "Price points of different Websites",
            x = "Website",
            y = "Price") +
       theme_minimal() +
-      theme(legend.position = "none")
+      theme(legend.position = "none") +
+      theme(axis.text.x = element_text(face = "bold", size = 12))
+    
      
    gg 
    
