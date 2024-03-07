@@ -150,7 +150,11 @@ function(input, output) {
       summarise(Number_of_products = n()) %>%
       pivot_wider(names_from = website, values_from = Number_of_products,  values_fill = 0)
     
-    datatable(data_with_price_group, options = list(dom = 'tpi'), filter = list(position = "bottom"))
+    datatable(data_with_price_group, options = list(dom = 'tpi'), filter = list(position = "bottom")) %>%
+      formatStyle(
+        columns = names(data_brand)[-1],  
+        backgroundColor = styleEqual(0, "pink")
+      )
     
     
   })
