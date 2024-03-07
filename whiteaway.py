@@ -269,7 +269,7 @@ for i in range(len(all_elsalg_links_df_new_clean)):
     
     # Concatenate the temporary DataFrame with the main DataFrame
     elsalg_df = pd.concat([elsalg_df, temp_df], ignore_index=True)
-    time.sleep(5)
+    time.sleep(3)
     
 elsalg_df['website'] = 'Elsalg'
 elsalg_df.to_csv("elsalg_prices.csv")
