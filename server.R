@@ -22,7 +22,7 @@ data <- rbind(whiteaway, elgiganten, elsalg) %>% mutate(brand = if_else(brand ==
                                                                         "Liebherr", brand)) %>%
                                                  mutate(brand = if_else(brand == "GRAM",
                                                  "Gram", brand)) %>%
-                                                 mutate(brand = if_else(brand == "SMEG",
+                                                 mutate(brand = if_else(brand == ("SMEG" | "smeg" ),
                                                  "Smeg", brand)) %>%
                                                  filter(brand != "")
 
