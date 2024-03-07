@@ -12,9 +12,9 @@ shinyUI(fluidPage(
   
   titlePanel("Whiteaway vs Elgiganten vs Elsalg"),
   
-  img(src="./whiteaway.png",  height="10%", width="10%",  align = "center"),
-  img(src="./elgiganten.png",  height="10%", width="10%",  align = "center"),
-  img(src="./elsalg.png",  height="10%", width="10%",  align = "center"),
+  img(src="./whiteaway.png",  height="8%", width="8%",  align = "center"),
+  img(src="./elgiganten.png",  height="8%", width="8%",  align = "center"),
+  img(src="./elsalg1.png",  height="8%", width="8%",  align = "center"),
   
   HTML("<p>Refrigerator Price comparison between Whiteaway, Elgiganten and Elsalg </p>"),
   

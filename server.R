@@ -18,7 +18,13 @@ elgiganten <- elgiganten %>% filter(product_type != "Køletaske og køleboks" & 
 
 elsalg$price <- as.numeric(gsub(",", ".", elsalg$price))
 
-data <- rbind(whiteaway, elgiganten, elsalg)
+data <- rbind(whiteaway, elgiganten, elsalg) %>% mutate(brand = if_else(brand == "LiebHerr",
+                                                                        "Liebherr", brand)) %>%
+                                                 mutate(brand = if_else(brand == "GRAM",
+                                                 "Gram", brand)) %>%
+                                                 mutate(brand = if_else(brand == "SMEG",
+                                                 "Smeg", brand)) %>%
+                                                 filter(brand != "")
 
 
 
@@ -83,7 +89,7 @@ function(input, output) {
       geom_text_repel(data = highest_elsalg, aes(x = website, y = price, 
                                                     label = paste0(website, "'s highest price is ",
                                                                    price)),
-                      color = "black", size = 4 , vjust = -1.5) +
+                      color = "darkgreen", size = 4 , vjust = -1.5) +
       geom_text_repel(data = lowest_elgiganten, aes(x = website, y = price, 
                                                      label = paste0(website, "'s lowest price is ",
                                                                     price)),
@@ -95,7 +101,7 @@ function(input, output) {
       geom_text_repel(data = lowest_elsalg, aes(x = website, y = price, 
                                                    label = paste0(website, "'s lowest price is ",
                                                                   price)),
-                      color = "black", size = 4 , vjust = 2) +
+                      color = "darkgreen", size = 4 , vjust = 2) +
       geom_text_repel(data = median_elgiganten, aes(x = website, y = price, 
                                                      label = paste0(website, "'s median price is ",
                                                                     price)),
@@ -107,7 +113,7 @@ function(input, output) {
       geom_text_repel(data = median_elsalg, aes(x = website, y = price, 
                                                    label = paste0(website, "'s median price is ",
                                                                   price)),
-                      color = "black", size = 4 , vjust = -1.5) +
+                      color = "darkgreen", size = 4 , vjust = -1.5) +
       labs(title = "Price points of different Websites",
            x = "Website",
            y = "Price") +
